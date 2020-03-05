@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Input } from '../Utils/Utils'
+import tokenservice from '../../services/token-service'
 
 export default class LoginForm extends Component {
   static defaultProps = {
@@ -14,6 +15,9 @@ export default class LoginForm extends Component {
 
     console.log('login form submitted')
     console.log({ user_name, password })
+    tokenservice.saveAuthToken(
+      tokenservice.makeBasicAuthToken(user_name, password.value)
+    )
 
     user_name.value = ''
     password.value = ''
